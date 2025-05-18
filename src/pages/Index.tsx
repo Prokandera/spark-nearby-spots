@@ -15,6 +15,7 @@ import {
   CollapsibleContent, 
   CollapsibleTrigger 
 } from "@/components/ui/collapsible";
+import NearbyStations from '@/components/NearbyStations';
 
 const Index = () => {
   return (
@@ -157,7 +158,22 @@ const Index = () => {
                 <Car className="h-8 w-8 text-ev-sky" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Start Charging</h3>
-              <p className="text-gray-600">Navigate to your chosen station and begin charging your electric vehicle with ease.</p>
+              <p className="text-gray-600">Find the nearest available stations and get charging instructions when you arrive.</p>
+              
+              <Collapsible className="w-full mt-4">
+                <CollapsibleTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="border-ev-sky text-ev-sky hover:bg-ev-sky/10 w-full"
+                  >
+                    <BatteryCharging className="mr-2 h-4 w-4" />
+                    Find Nearby Stations
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <NearbyStations />
+                </CollapsibleContent>
+              </Collapsible>
             </div>
           </div>
         </div>
@@ -205,4 +221,3 @@ const Index = () => {
 };
 
 export default Index;
-
