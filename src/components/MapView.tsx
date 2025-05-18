@@ -4,6 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toLngLatLike } from './MapViewFix';
 
 interface MapViewProps {
   onStationSelect?: (station: any) => void;
@@ -104,9 +105,9 @@ const MapView = ({ onStationSelect }: MapViewProps) => {
                           </svg>
                         </div>`;
         
-        // Add marker to map
+        // Add marker to map using toLngLatLike to fix type error
         const marker = new mapboxgl.Marker({ element: el })
-          .setLngLat(station.coordinates)
+          .setLngLat(toLngLatLike(station.coordinates))
           .addTo(map.current);
 
         // Add click event to marker

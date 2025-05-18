@@ -61,7 +61,17 @@ const Index = () => {
                 <MapPin className="h-8 w-8 text-ev-purple" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Find Stations</h3>
-              <p className="text-gray-600">Locate charging stations near you with our interactive map and real-time availability.</p>
+              <p className="text-gray-600 mb-4">Locate charging stations near you with our interactive map and real-time availability.</p>
+              <Button 
+                variant="outline" 
+                className="border-ev-purple text-ev-purple hover:bg-ev-purple/10 mt-auto"
+                asChild
+              >
+                <Link to="/map">
+                  <MapPin className="mr-2 h-4 w-4" />
+                  Open Map
+                </Link>
+              </Button>
             </div>
             <div className="flex flex-col items-center text-center p-4">
               <div className="bg-ev-blue/10 p-4 rounded-full mb-4">
