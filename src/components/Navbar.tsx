@@ -1,13 +1,29 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { BatteryCharging, Menu } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { BatteryCharging, Menu, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useAuth } from '@/lib/auth';
 
 const Navbar = () => {
   const isMobile = useIsMobile();
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+  
+  const handleLogin = () => {
+    navigate('/login');
+  };
+  
+  const handleSignup = () => {
+    navigate('/signup');
+  };
+  
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
   
   const NavLinks = () => (
     <>
@@ -42,8 +58,39 @@ const Navbar = () => {
         )}
 
         <div className="flex items-center space-x-4">
-          <Button variant="outline" className="hidden sm:inline-flex">Login</Button>
-          <Button className="bg-ev-blue hover:bg-ev-blue/90 hidden sm:inline-flex">Sign Up</Button>
+          {isAuthenticated ? (
+            <>
+              <div className="hidden sm:flex items-center space-x-1">
+                <User className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm font-medium">{user?.name}</span>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="hidden sm:inline-flex"
+                onClick={handleLogout}
+              >
+                <LogOut className="mr-1.5 h-4 w-4" />
+                Log out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button 
+                variant="outline" 
+                className="hidden sm:inline-flex" 
+                onClick={handleLogin}
+              >
+                Login
+              </Button>
+              <Button 
+                className="bg-ev-blue hover:bg-ev-blue/90 hidden sm:inline-flex"
+                onClick={handleSignup}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
           
           {/* Mobile menu */}
           {isMobile && (
@@ -56,8 +103,38 @@ const Navbar = () => {
               <SheetContent>
                 <div className="flex flex-col space-y-6 mt-8 text-base font-medium">
                   <NavLinks />
-                  <Button className="w-full mt-2">Login</Button>
-                  <Button className="w-full bg-ev-blue hover:bg-ev-blue/90">Sign Up</Button>
+                  {isAuthenticated ? (
+                    <>
+                      <div className="flex items-center space-x-2 py-2">
+                        <User className="h-4 w-4 text-muted-foreground" />
+                        <span>{user?.name}</span>
+                      </div>
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={handleLogout}
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Log out
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button 
+                        className="w-full" 
+                        variant="outline"
+                        onClick={handleLogin}
+                      >
+                        Login
+                      </Button>
+                      <Button 
+                        className="w-full bg-ev-blue hover:bg-ev-blue/90"
+                        onClick={handleSignup}
+                      >
+                        Sign Up
+                      </Button>
+                    </>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
