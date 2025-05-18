@@ -4,6 +4,17 @@ import { Link } from 'react-router-dom';
 import { BatteryCharging, MapPin, Car, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
+import { 
+  Accordion, 
+  AccordionContent, 
+  AccordionItem, 
+  AccordionTrigger 
+} from '@/components/ui/accordion';
+import { 
+  Collapsible, 
+  CollapsibleContent, 
+  CollapsibleTrigger 
+} from "@/components/ui/collapsible";
 
 const Index = () => {
   return (
@@ -78,7 +89,68 @@ const Index = () => {
                 <Info className="h-8 w-8 text-ev-blue" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Get Details</h3>
-              <p className="text-gray-600">View detailed information about each station including charging speeds, pricing, and amenities.</p>
+              <p className="text-gray-600 mb-4">View detailed information about each station including charging speeds, pricing, and amenities.</p>
+              
+              <Collapsible className="w-full">
+                <CollapsibleTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="border-ev-blue text-ev-blue hover:bg-ev-blue/10 w-full"
+                  >
+                    <Info className="mr-2 h-4 w-4" />
+                    Learn About Charging
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="mt-4">
+                  <Accordion type="single" collapsible className="text-left">
+                    <AccordionItem value="charging-types">
+                      <AccordionTrigger className="text-sm font-medium">Charging Types</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+                          <li><span className="font-medium">Level 1 (120V):</span> Standard household outlet, 3-5 miles of range per hour.</li>
+                          <li><span className="font-medium">Level 2 (240V):</span> Common at public stations, 15-30 miles of range per hour.</li>
+                          <li><span className="font-medium">DC Fast Charging:</span> High-power stations providing 80% charge in 20-30 minutes.</li>
+                          <li><span className="font-medium">Tesla Supercharger:</span> Proprietary network for Tesla vehicles.</li>
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="charging-speeds">
+                      <AccordionTrigger className="text-sm font-medium">Charging Speeds</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+                          <li><span className="font-medium">Level 1:</span> 1.4 kW to 1.9 kW power output.</li>
+                          <li><span className="font-medium">Level 2:</span> 3.3 kW to 22 kW power output.</li>
+                          <li><span className="font-medium">DC Fast:</span> 50 kW to 350+ kW power output.</li>
+                          <li><span className="font-medium">Tesla Supercharger V3:</span> Up to 250 kW power output.</li>
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="pricing-models">
+                      <AccordionTrigger className="text-sm font-medium">Pricing Models</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+                          <li><span className="font-medium">Per kWh:</span> $0.20-$0.60 per kilowatt-hour.</li>
+                          <li><span className="font-medium">Per minute:</span> $0.10-$0.35 per minute of charging.</li>
+                          <li><span className="font-medium">Session fee:</span> Flat fee per charging session ($2-$5).</li>
+                          <li><span className="font-medium">Membership:</span> Monthly subscription with discounted rates.</li>
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="station-networks">
+                      <AccordionTrigger className="text-sm font-medium">Station Networks</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
+                          <li><span className="font-medium">ChargePoint:</span> Largest network with 100,000+ charging points.</li>
+                          <li><span className="font-medium">EVgo:</span> Fast charging network in metropolitan areas.</li>
+                          <li><span className="font-medium">Electrify America:</span> Expanding network with high-power chargers.</li>
+                          <li><span className="font-medium">Tesla Supercharger:</span> Exclusive network for Tesla vehicles.</li>
+                          <li><span className="font-medium">Blink:</span> Public and residential charging solutions.</li>
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </CollapsibleContent>
+              </Collapsible>
             </div>
             <div className="flex flex-col items-center text-center p-4">
               <div className="bg-ev-sky/10 p-4 rounded-full mb-4">
@@ -133,3 +205,4 @@ const Index = () => {
 };
 
 export default Index;
+
