@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Navigation, BatteryCharging, Flash } from 'lucide-react';
+import { Navigation, BatteryCharging, Zap } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Station {
@@ -67,7 +67,7 @@ const NearbyStations = ({ onNavigate }: NearbyStationsProps) => {
     
     toast.success(`Charging started at ${selectedStation.name}`, {
       description: "Your vehicle is now charging. You'll receive a notification when complete.",
-      icon: <Flash className="h-4 w-4" />,
+      icon: <Zap className="h-4 w-4" />,
       duration: 5000
     });
   };
@@ -94,7 +94,7 @@ const NearbyStations = ({ onNavigate }: NearbyStationsProps) => {
                     className="bg-green-600 hover:bg-green-700" 
                     onClick={handleStartCharging}
                   >
-                    <Flash className="mr-2 h-4 w-4" />
+                    <Zap className="mr-2 h-4 w-4" />
                     Start Charging Now
                   </Button>
                 </div>
